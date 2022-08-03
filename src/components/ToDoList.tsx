@@ -6,6 +6,7 @@ import ToDo from './ToDo';
 function ToDoList() {
     //컴포넌트 분리로 기능이 분리되었으므로 가져와서 쓰는 useRecoil"Value"를 써야함
     const toDos = useRecoilValue(toDoState);
+    console.log('ToDoList file toDos', toDos);
 
     return (
         <div>
