@@ -9,14 +9,9 @@ function ToDo({ text, category, id }: IToDo) {
             currentTarget: { name },
         } = event;
         setToDos((oldToDos) => {
-            //oldTodos : 기존의 목록을 받아오는 인자
-            //click event 가 일어난 toDo 인덱스 감지
             const targetIndex = oldToDos.findIndex((toDo) => toDo.id === id);
-            const oldToDo = oldToDos[targetIndex];
-            //감지된 인덱스의 카테고리를 바꿔줌
-            const newToDo = { text, id, category: name };
-            console.log('oldToDo, newToDo = ', oldToDo, newToDo);
-            return oldToDos;
+            const newToDo = { text, id, category: name as IToDo['category'] };
+            return [...oldToDos.slice(0, targetIndex), newToDo, ...oldToDos.slice(targetIndex + 1)];
         });
     };
 
