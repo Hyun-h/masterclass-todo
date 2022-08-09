@@ -8,7 +8,8 @@ function ToDoList() {
     const toDos = useRecoilValue(toDoSelector);
     const [category, setCategory] = useRecoilState(categoryState);
     const onInput = (event: React.FormEvent<HTMLSelectElement>) => {
-        setCategory(event.currentTarget.value);
+        //타입스크립트는 option의 value가 categories 타입과 같다는 걸 알지 못함
+        setCategory(event.currentTarget.value as any);
     };
     console.log(category);
 

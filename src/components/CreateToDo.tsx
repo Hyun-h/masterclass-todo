@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
-import { useSetRecoilState } from 'recoil';
-import { toDoState } from './atoms';
+import { useSetRecoilState, useRecoilValue } from 'recoil';
+import { categoryState, toDoState } from './atoms';
 
 interface IForm {
     toDo: string;
@@ -9,9 +9,12 @@ interface IForm {
 function CreateToDo() {
     //컴포넌트 분리로 기능이 분리되었으므로 use"Set"RecoilState를 써야함
     const setToDos = useSetRecoilState(toDoState);
+    //category도 상태관리를 하므로 recoil에서 가져와서 사용 가능
+    const category = useRecoilValue(categoryState);
     const { register, handleSubmit, setValue } = useForm<IForm>();
     const onSubmit = ({ toDo }: IForm) => {
-        setToDos((oldToDos) => [{ text: toDo, id: Date.now(), category: 'TO_DO' }, ...oldToDos]);
+        //atom에서 category에 type을 부여해줘야 함
+        setToDos((oldToDos) => [{ text: toDo, id: Date.now(), category }, ...oldToDos]);
         setValue('toDo', '');
     };
 
