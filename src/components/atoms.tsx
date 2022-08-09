@@ -1,18 +1,29 @@
 import { atom, selector } from 'recoil';
 
 //type은 단순히 복붙을 하게 해서 활용성이 떨어짐
-type categories = 'TO_DO' | 'DOING' | 'DONE';
+//type categories = 'TO_DO' | 'DOING' | 'DONE';
+export enum Categories {
+    //이렇게만 사용하면 식별을 순서대로 숫자로 나타냄. 예) Categories['TO_DO'] = 0
+    // 'TO_DO',
+    // 'DOING',
+    // 'DONE',
+
+    //숫자가 아닌 각각의 의미를 부여하려면 아래와 같이 사용. 'TO_DO' = '원하는 이름'
+    'TO_DO' = 'TO_DO',
+    'DOING' = 'DOING',
+    'DONE' = 'DONE',
+}
 
 export interface IToDo {
     text: string;
     id: number;
-    category: categories;
+    category: Categories;
 }
 
 //category 상태관리
-export const categoryState = atom<categories>({
+export const categoryState = atom<Categories>({
     key: 'category',
-    default: 'TO_DO',
+    default: Categories.TO_DO,
 });
 
 export const toDoState = atom<IToDo[]>({

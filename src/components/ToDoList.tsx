@@ -1,5 +1,5 @@
 import { useRecoilValue, useRecoilState } from 'recoil';
-import { categoryState, toDoSelector } from './atoms';
+import { categoryState, toDoSelector, Categories } from './atoms';
 import CreateToDo from './CreateToDo';
 import ToDo from './ToDo';
 
@@ -17,9 +17,10 @@ function ToDoList() {
         <div>
             <h1>To Dos</h1>
             <select value={category} onInput={onInput}>
-                <option value='TO_DO'>To Do</option>
-                <option value='DOING'>Doing</option>
-                <option value='DONE'>Done</option>
+                {/* 실수할 수 있으므로... 전체적인 타입을 수정해야하는데 한 곳만 빼고 수정한다던가... 그런.. string을 바로 쓰는 건 좋지 않음 */}
+                <option value={Categories.TO_DO}>To Do</option>
+                <option value={Categories.DOING}>Doing</option>
+                <option value={Categories.DONE}>Done</option>
             </select>
             <hr />
             <CreateToDo />
